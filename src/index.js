@@ -13,8 +13,8 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
   mainWindow = new BrowserWindow({
-    width: 480,
-    height: 360,
+    width: 1000,
+    height: 800,
     'min-width': 480,
     'min-height': 280,
     frame: true
