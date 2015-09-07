@@ -17,7 +17,9 @@ app.on('ready', function() {
     height: 800,
     'min-width': 480,
     'min-height': 280,
-    frame: true
+    frame: true,
+    resizable: false,
+    icon: __dirname + 'images/chromecaster.png'
   });
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
   mainWindow.on('closed', function() {

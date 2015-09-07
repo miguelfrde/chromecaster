@@ -29,6 +29,11 @@ gulp.task('install', function () {
     .pipe(install({ production: true }));
 });
 
+gulp.task('images', function () {
+  return gulp.src('./src/images/**/*')
+    .pipe(gulp.dest('./compile/images'));
+})
+
 gulp.task('copyindex', function () {
   return gulp.src([ './src/index.html', './src/index.js' ])
     .pipe(gulp.dest('./compile'));
@@ -45,10 +50,11 @@ gulp.task('build', function () {
   });
 });
 
-gulp.task('compile', ['browserify', 'copyindex', 'sass', 'install']);
+gulp.task('compile', ['browserify', 'copyindex', 'sass', 'images', 'install']);
 
 gulp.task('watch-all', function () {
   gulp.watch('./src/scripts/**/*', ['browserify']);
+  gulp.watch('./src/images/**/*', ['images']);
   gulp.watch(['./src/index.html', './src/index.js'], ['copyindex']);
   gulp.watch('./src/style/**/*', ['sass']);
   gulp.watch(['./compile/**/*', '!./compile/node_modules/**/*'], ['build']);
