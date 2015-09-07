@@ -1,0 +1,32 @@
+{
+  "name": "Chromecaster",
+  "version": "0.0.1",
+  "description": "App for viewing local photos and videos on the TV using Google Chromecast",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miguelfrde/chromecaster.git"
+  },
+  "author": "Miguel Flores Ruiz de Eguino (miguelfrde)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/miguelfrde/chromecaster/issues"
+  },
+  "homepage": "https://miguelfrde.com/chromecaster",
+  "dependencies": {
+    "babelify": "^6.3.0",
+    "browserify": "^11.0.1",
+    "gulp": "^3.9.0",
+    "gulp-atom": "^0.1.0",
+    "gulp-install": "^0.4.0",
+    "gulp-sass": "^2.0.4",
+    "react": "^0.13.3",
+    "require-dir": "^0.3.0",
+    "run-sequence": "^1.1.2",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {}
+}
