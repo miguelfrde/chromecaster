@@ -4,12 +4,26 @@
 <head>
   <meta charset="UTF-8">
   <title>Chromecaster</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="./main.css" rel="stylesheet">
 </head>
 
-<body>
-  <div id="chromecaster-app"></div>
-</body>
+<body></body>
+
+<script>
+  var WebFontConfig = {
+    google: { families: [ 'Roboto:400,300,500:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+    '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
 
 <script>
   new require( './app.js' );
