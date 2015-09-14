@@ -3,7 +3,8 @@ const Router = require('react-router');
 const mui = require('material-ui');
 const { AppBar, IconButton, AppCanvas, Styles, Tabs, Tab, Paper } = require('material-ui');
 const { Colors, Spacing, Typography } = Styles;
-const ThemeManager = new Styles.ThemeManager();
+
+const SettingsDialog = require('./SettingsDialog.js');
 
 const menuItems = [
   { route: 'photos', text: 'Photos' },
@@ -11,22 +12,12 @@ const menuItems = [
 ];
 
 const MenuBar = React.createClass({
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-
   contextTypes: {
     router: React.PropTypes.func
   },
 
   propTypes: {
     selectedTab: React.PropTypes.string
-  },
-
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
   },
 
   componentWillMount() {
@@ -37,7 +28,8 @@ const MenuBar = React.createClass({
     this.setState({tabIndex: this._getSelectedIndex()});
   },
 
-  openSettingsModal() {
+  _openSettingsModal() {
+    this.refs.settingsModal.open();
   },
 
   _getSelectedIndex() {
@@ -96,7 +88,7 @@ const MenuBar = React.createClass({
     const settingsButton = (
       <IconButton
           iconClassName="material-icons"
-          onClick={this.openSettingsModal}
+          onClick={this._openSettingsModal}
           linkButton={false}>
         settings
       </IconButton>
@@ -115,6 +107,7 @@ const MenuBar = React.createClass({
       <div>
         {this._appBar()}
         {this._tabs()}
+        <SettingsDialog ref="settingsModal"/>
       </div>
     );
   }
