@@ -28,7 +28,7 @@ const MenuBar = React.createClass({
     this.setState({tabIndex: this._getSelectedIndex()});
   },
 
-  _openSettingsModal() {
+  openSettingsModal() {
     this.refs.settingsModal.open();
   },
 
@@ -63,7 +63,7 @@ const MenuBar = React.createClass({
         bottom:0,
       },
       tab: {
-        fontSize: '16px',
+        fontSize: 16,
         height: 64,
         padding: '0 20px'
     }};
@@ -88,7 +88,7 @@ const MenuBar = React.createClass({
     const settingsButton = (
       <IconButton
           iconClassName="material-icons"
-          onClick={this._openSettingsModal}
+          onClick={this.openSettingsModal}
           linkButton={false}>
         settings
       </IconButton>
@@ -98,7 +98,7 @@ const MenuBar = React.createClass({
               showMenuIconButton={false}
               menuItems={menuItems}
               iconElementRight={settingsButton}
-              style={{position: 'absolute', top: 0, zIndex: 0}}/>
+              style={{position: 'fixed', top: 0, zIndex: 0}} />
     );
   },
 
