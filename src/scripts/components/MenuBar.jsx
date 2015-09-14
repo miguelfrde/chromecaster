@@ -6,11 +6,6 @@ const { Colors, Spacing, Typography } = Styles;
 
 const SettingsDialog = require('./SettingsDialog.jsx');
 
-const menuItems = [
-  { route: 'photos', text: 'Photos' },
-  { route:  'videos', text: 'Videos' }
-];
-
 const MenuBar = React.createClass({
   contextTypes: {
     router: React.PropTypes.func
@@ -55,7 +50,6 @@ const MenuBar = React.createClass({
       },
       container: {
         position: 'absolute',
-        right: (Spacing.desktopGutter/2) - 48,
         bottom: 0,
       },
       tabs: {
@@ -94,9 +88,7 @@ const MenuBar = React.createClass({
       </IconButton>
     );
     return (
-      <AppBar title="Chromecaster"
-              showMenuIconButton={false}
-              menuItems={menuItems}
+      <AppBar showMenuIconButton={false}
               iconElementRight={settingsButton}
               style={{position: 'fixed', top: 0, zIndex: 0}} />
     );
