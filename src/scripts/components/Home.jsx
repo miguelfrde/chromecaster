@@ -3,17 +3,11 @@ const mui = require('material-ui');
 const { RaisedButton, FontIcon, Styles }= require('material-ui');
 const ThemeManager = new Styles.ThemeManager();
 const Colors = Styles.Colors;
+const Section = require('./Section.jsx');
 
 const Home = React.createClass({
   render() {
     const styles = {
-      root: {
-        padding: 32,
-        textAlign: 'center',
-        marginTop: 64,
-        textWeight: Styles.fontWeightNormal,
-        backgroundColor: Colors.grey100
-      },
       welcome: {
         fontSize: 36,
         textWeight: '400'
@@ -47,7 +41,7 @@ const Home = React.createClass({
     );
 
     return (
-      <section style={styles.root}>
+      <Section>
         <p style={styles.welcome}>Welcome</p>
         <img src="images/chromecaster.png" style={styles.logo}/>
         <p style={styles.instructions}>To begin connect to your Chromecast</p>
@@ -55,7 +49,7 @@ const Home = React.createClass({
         <div style={styles.footer}>
           Built with {loveIcon} by miguelfrde
         </div>
-      </section>
+      </Section>
     );
   }
 });
