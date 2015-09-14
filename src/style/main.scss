@@ -1,4 +1,17 @@
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
 body {
   padding: 0;
   margin: 0;
+  font-family: 'Roboto', 'Verdana';
+  height: 100%;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.material-icons {
+  vertical-align: middle;
 }
