@@ -3,10 +3,10 @@ const Router = require('react-router');
 const Route = Router.Route;
 const DefaultRoute = Router.DefaultRoute;
 
-const App = require('./components/App.js');
-const Photos = require('./components/Photos.js');
-const Videos = require('./components/Videos.js');
-const Home = require('./components/Home.js');
+const App = require('./components/App.jsx');
+const Photos = require('./components/Photos.jsx');
+const Videos = require('./components/Videos.jsx');
+const Home = require('./components/Home.jsx');
 
 const AppRoutes = (
   <Route path="/" handler={App}>

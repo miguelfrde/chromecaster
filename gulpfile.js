@@ -9,7 +9,7 @@ var sass = require('gulp-sass');
 
 gulp.task('browserify', function () {
   var bundler = browserify({
-    entries: ['./src/scripts/app.js'],
+    entries: ['./src/scripts/app.jsx'],
     transform: [babelify]
   });
   return bundler.bundle()

@@ -4,7 +4,7 @@ const mui = require('material-ui');
 const { AppBar, IconButton, AppCanvas, Styles, Tabs, Tab, Paper } = require('material-ui');
 const { Colors, Spacing, Typography } = Styles;
 
-const SettingsDialog = require('./SettingsDialog.js');
+const SettingsDialog = require('./SettingsDialog.jsx');
 
 const menuItems = [
   { route: 'photos', text: 'Photos' },

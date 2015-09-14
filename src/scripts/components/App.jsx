@@ -5,7 +5,7 @@ const { AppCanvas, Styles } = require('material-ui');
 const ThemeManager = new Styles.ThemeManager();
 const RouteHandler = Router.RouteHandler;
 
-const MenuBar = require('./MenuBar.js');
+const MenuBar = require('./MenuBar.jsx');
 
 
 const App = React.createClass({
