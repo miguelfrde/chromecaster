@@ -1,5 +1,6 @@
 import React from 'react';
 import { RaisedButton, FontIcon, Styles } from 'material-ui';
+import SettingsDialog from './SettingsDialog.jsx';
 import Section from './Section.jsx';
 
 const ThemeManager = new Styles.ThemeManager();
@@ -7,8 +8,15 @@ const Colors = Styles.Colors;
 
 
 const Home = React.createClass({
+  _openSettings() {
+    this.refs.settingsModal.open();
+  },
+
   render() {
     const styles = {
+      container: {
+        textAlign: 'center'
+      },
       welcome: {
         fontSize: 36,
         textWeight: '400'
@@ -43,13 +51,18 @@ const Home = React.createClass({
 
     return (
       <Section>
-        <p style={styles.welcome}>Welcome</p>
-        <img src="images/chromecaster.png" style={styles.logo}/>
-        <p style={styles.instructions}>To begin connect to your Chromecast</p>
-        <RaisedButton label="Connect" primary={true} />
-        <div style={styles.footer}>
-          Built with {loveIcon} by miguelfrde
+        <div style={styles.container}>
+          <p style={styles.welcome}>Welcome</p>
+          <img src="images/chromecaster.png" style={styles.logo}/>
+          <p style={styles.instructions}>To begin connect to your Chromecast</p>
+          <RaisedButton label="Connect"
+                        primary={true}
+                        onTouchTap={this._openSettings}/>
+          <div style={styles.footer}>
+            Built with {loveIcon} by miguelfrde
+          </div>
         </div>
+        <SettingsDialog ref="settingsModal"/>
       </Section>
     );
   }

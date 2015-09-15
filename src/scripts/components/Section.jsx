@@ -5,7 +5,6 @@ const Section = React.createClass({
   render() {
     const style = {
       padding: 32,
-      textAlign: 'center',
       marginTop: 64
     };
 
