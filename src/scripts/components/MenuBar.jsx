@@ -1,10 +1,10 @@
-const React = require('react');
-const Router = require('react-router');
-const mui = require('material-ui');
-const { AppBar, IconButton, AppCanvas, Styles, Tabs, Tab, Paper } = require('material-ui');
+import React from 'react';
+import Router from 'react-router';
+import { AppBar, IconButton, AppCanvas, Styles, Tabs, Tab, Paper } from 'material-ui';
+import SettingsDialog from './SettingsDialog.jsx';
+
 const { Colors, Spacing, Typography } = Styles;
 
-const SettingsDialog = require('./SettingsDialog.jsx');
 
 const MenuBar = React.createClass({
   contextTypes: {

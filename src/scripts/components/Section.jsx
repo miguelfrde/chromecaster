@@ -1,5 +1,5 @@
-const React = require('react');
-const mui = require('material-ui');
+import React from 'react';
+
 
 const Section = React.createClass({
   render() {

@@ -1,12 +1,11 @@
-const React = require('react');
-const Router = require('react-router');
-const mui = require('material-ui');
-const { AppCanvas, Styles } = require('material-ui');
+import React from 'react';
+import Router from 'react-router';
+import { AppCanvas, Styles } from 'material-ui';
+import MenuBar from './MenuBar.jsx';
+
 const ThemeManager = new Styles.ThemeManager();
 const RouteHandler = Router.RouteHandler;
 const Colors = Styles.Colors;
-
-const MenuBar = require('./MenuBar.jsx');
 
 
 const App = React.createClass({

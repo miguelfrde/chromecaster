@@ -1,6 +1,7 @@
-const React = require('react');
-const Router = require('react-router');
-const { Dialog, FlatButton } = require('material-ui');
+import React from 'react';
+import Router from 'react-router';
+import { Dialog, FlatButton, DropDownMenu } from 'material-ui';
+
 
 const SettingsDialog = React.createClass({
   _handleCustomDialogClose() {
@@ -14,6 +15,16 @@ const SettingsDialog = React.createClass({
 
   open() {
     this.refs.dialog.show();
+  },
+
+  getAvailableChromecasts() {
+    return [
+      { payload: '1', text: 'Chromecast one' },
+      { payload: '2', text: 'Chromecast two' },
+      { payload: '3', text: 'Chromecast three' },
+      { payload: '4', text: 'Chromecast four' },
+      { payload: '5', text: 'Chromecast five' }
+    ];
   },
 
   render() {
@@ -35,7 +46,10 @@ const SettingsDialog = React.createClass({
               autoScrollBodyContent={true}
               modal={true}
               ref="dialog">
-        <div style={{height: '2000px'}}>Settings</div>
+        <div style={{height: '2000px'}}>
+          <p>Pick your chromecast:</p>
+          <DropDownMenu menuItems={this.getAvailableChromecasts()} />
+        </div>
       </Dialog>
     );
   }

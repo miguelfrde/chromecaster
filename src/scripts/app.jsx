@@ -1,7 +1,9 @@
-const React = require('react');
-const Router = require('react-router');
-const injectTapEventPlugin = require('react-tap-event-plugin');
-const AppRoutes = require('./app-routes.jsx');
+import React from 'react';
+import Router from 'react-router';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import AppRoutes from './app-routes.jsx';
+
+
 const remote = window.require('remote');
 
 window.React = React;

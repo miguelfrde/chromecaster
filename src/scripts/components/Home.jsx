@@ -1,9 +1,10 @@
-const React = require('react');
-const mui = require('material-ui');
-const { RaisedButton, FontIcon, Styles }= require('material-ui');
+import React from 'react';
+import { RaisedButton, FontIcon, Styles } from 'material-ui';
+import Section from './Section.jsx';
+
 const ThemeManager = new Styles.ThemeManager();
 const Colors = Styles.Colors;
-const Section = require('./Section.jsx');
+
 
 const Home = React.createClass({
   render() {

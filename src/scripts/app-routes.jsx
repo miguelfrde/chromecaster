@@ -1,12 +1,12 @@
-const React = require('react');
-const Router = require('react-router');
+import React from 'react';
+import Router from 'react-router';
+import App from './components/App.jsx';
+import Photos from './components/Photos.jsx';
+import Videos from './components/Videos.jsx';
+import Home from './components/Home.jsx';
+
 const Route = Router.Route;
 const DefaultRoute = Router.DefaultRoute;
-
-const App = require('./components/App.jsx');
-const Photos = require('./components/Photos.jsx');
-const Videos = require('./components/Videos.jsx');
-const Home = require('./components/Home.jsx');
 
 const AppRoutes = (
   <Route path="/" handler={App}>
