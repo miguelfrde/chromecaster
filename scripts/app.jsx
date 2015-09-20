@@ -3,6 +3,7 @@ import Router from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import AppRoutes from './app-routes.jsx';
 
+require('../style/main.scss');
 
 const remote = window.require('remote');
 
