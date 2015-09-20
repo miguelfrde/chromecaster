@@ -6,36 +6,37 @@ import SettingsDialog from './SettingsDialog.jsx';
 const { Colors, Spacing, Typography } = Styles;
 
 
-const MenuBar = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.func
-  },
-
-  propTypes: {
-    selectedTab: React.PropTypes.string
-  },
+export default class MenuBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.openSettingsModal = this.openSettingsModal.bind(this);
+    this._getSelectedIndex = this._getSelectedIndex.bind(this);
+    this._handleTabChange = this._handleTabChange.bind(this);
+    this._tabs = this._tabs.bind(this);
+    this._appBar = this._appBar.bind(this);
+  }
 
   componentWillMount() {
     this.setState({tabIndex: this._getSelectedIndex()});
-  },
+  }
 
   componentWillReceiveProps() {
     this.setState({tabIndex: this._getSelectedIndex()});
-  },
+  }
 
   openSettingsModal() {
     this.refs.settingsModal.open();
-  },
+  }
 
   _getSelectedIndex() {
     return this.context.router.isActive('photos') ? 'photos' :
       this.context.router.isActive('videos') ? 'videos' : 'home';
-  },
+  }
 
   _handleTabChange(value, e, tab) {
     this.context.router.transitionTo(tab.props.route);
     this.setState({tabIndex: this._getSelectedIndex()});
-  },
+  }
 
   _tabs() {
     const styles = {
@@ -76,7 +77,7 @@ const MenuBar = React.createClass({
         </div>
       </Paper>
     );
-  },
+  }
 
   _appBar() {
     const settingsButton = (
@@ -92,7 +93,7 @@ const MenuBar = React.createClass({
               iconElementRight={settingsButton}
               style={{position: 'fixed', top: 0, zIndex: 0}} />
     );
-  },
+  }
 
   render() {
     return (
@@ -103,6 +104,13 @@ const MenuBar = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = MenuBar;
+
+MenuBar.contextTypes = {
+  router: React.PropTypes.func
+};
+
+MenuBar.propTypes = {
+  selectedTab: React.PropTypes.string
+};

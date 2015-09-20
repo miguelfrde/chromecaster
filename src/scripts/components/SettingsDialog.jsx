@@ -3,19 +3,27 @@ import Router from 'react-router';
 import { Dialog, FlatButton, DropDownMenu } from 'material-ui';
 
 
-const SettingsDialog = React.createClass({
+export default class SettingsDialog extends React.Component {
+  constructor(props) {
+    super(props);
+    this._handleCustomDialogClose = this._handleCustomDialogClose.bind(this);
+    this._handleCustomDialogSave = this._handleCustomDialogSave.bind(this);
+    this.open = this.open.bind(this);
+    this.getAvailableChromecasts = this.getAvailableChromecasts.bind(this);
+  }
+
   _handleCustomDialogClose() {
     this.refs.dialog.dismiss();
-  },
+  }
 
   _handleCustomDialogSave() {
     // TODO: locate chromecasts, select preferred chromecast
     this.refs.dialog.dismiss();
-  },
+  }
 
   open() {
     this.refs.dialog.show();
-  },
+  }
 
   getAvailableChromecasts() {
     return [
@@ -25,7 +33,7 @@ const SettingsDialog = React.createClass({
       { payload: '4', text: 'Chromecast four' },
       { payload: '5', text: 'Chromecast five' }
     ];
-  },
+  }
 
   render() {
     const customActions = [
@@ -53,6 +61,4 @@ const SettingsDialog = React.createClass({
       </Dialog>
     );
   }
-});
-
-module.exports = SettingsDialog;
+}

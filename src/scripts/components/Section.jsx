@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Section = React.createClass({
+export default class Section extends React.Component {
   render() {
     const style = {
       padding: 32,
@@ -14,6 +14,4 @@ const Section = React.createClass({
       </section>
     );
   }
-});
-
-module.exports = Section;
+}

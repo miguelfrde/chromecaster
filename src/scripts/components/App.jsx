@@ -8,19 +8,7 @@ const RouteHandler = Router.RouteHandler;
 const Colors = Styles.Colors;
 
 
-const App = React.createClass({
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-
-  contextTypes: {
-    router: React.PropTypes.func
-  },
-
-  propTypes: {
-    selectedTab: React.PropTypes.string
-  },
-
+export default class App extends React.Component {
   getChildContext() {
     ThemeManager.setPalette({
       primary1Color: Colors.indigo500,
@@ -37,7 +25,7 @@ const App = React.createClass({
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
-  },
+  }
 
   render() {
     return (
@@ -47,6 +35,16 @@ const App = React.createClass({
       </AppCanvas>
     );
   }
-});
+}
 
-module.exports = App;
+App.childContextTypes = {
+  muiTheme: React.PropTypes.object
+};
+
+App.contextTypes = {
+  router: React.PropTypes.func
+};
+
+App.propTypes = {
+  selectedTab: React.PropTypes.string
+};

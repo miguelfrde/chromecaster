@@ -7,10 +7,15 @@ const ThemeManager = new Styles.ThemeManager();
 const Colors = Styles.Colors;
 
 
-const Home = React.createClass({
+export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this._openSettings = this._openSettings.bind(this);
+  }
+
   _openSettings() {
     this.refs.settingsModal.open();
-  },
+  }
 
   render() {
     const styles = {
@@ -66,6 +71,4 @@ const Home = React.createClass({
       </Section>
     );
   }
-});
-
-module.exports = Home;
+}

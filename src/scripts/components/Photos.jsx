@@ -1,12 +1,10 @@
 import React from 'react';
 
 
-const Photos = React.createClass({
+export default class Photos extends React.Component {
   render() {
     return (
       <h1>Photos</h1>
     );
   }
-});
-
-module.exports = Photos;
+}
