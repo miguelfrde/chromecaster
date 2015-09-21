@@ -4,11 +4,22 @@ import { AppCanvas, Styles } from 'material-ui';
 import MenuBar from './MenuBar.jsx';
 
 const ThemeManager = new Styles.ThemeManager();
-const RouteHandler = Router.RouteHandler;
 const Colors = Styles.Colors;
 
-
 export default class App extends React.Component {
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  }
+
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object
+  }
+
+  static propTypes = {
+    selectedTab: React.PropTypes.string,
+    children: React.PropTypes.node
+  }
+
   getChildContext() {
     ThemeManager.setPalette({
       primary1Color: Colors.indigo500,
@@ -31,20 +42,8 @@ export default class App extends React.Component {
     return (
       <AppCanvas>
         <MenuBar />
-        <RouteHandler />
+        {this.props.children}
       </AppCanvas>
     );
   }
 }
-
-App.childContextTypes = {
-  muiTheme: React.PropTypes.object
-};
-
-App.contextTypes = {
-  router: React.PropTypes.func
-};
-
-App.propTypes = {
-  selectedTab: React.PropTypes.string
-};

@@ -40,11 +40,13 @@ export default class SettingsDialog extends React.Component {
       <FlatButton
         label="Close"
         secondary={true}
-        onTouchTap={this._handleCustomDialogClose} />,
+        onTouchTap={this._handleCustomDialogClose}
+        key="close"/>,
       <FlatButton
         label="Save"
         primary={true}
-        onTouchTap={this._handleCustomDialogSave} />
+        onTouchTap={this._handleCustomDialogSave}
+        key="save"/>
     ];
 
     return (

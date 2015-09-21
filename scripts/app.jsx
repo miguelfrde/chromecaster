@@ -1,21 +1,23 @@
 import React from 'react';
 import Router from 'react-router';
+import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import AppRoutes from './app-routes.jsx';
+import createHashHistory from 'history/lib/createHashHistory';
+
+import configureStore from './store/configureStore.js';
+import routes from './routes.jsx';
+
 
 require('../style/main.scss');
 
-const remote = window.require('remote');
-
-window.React = React;
-
 injectTapEventPlugin();
 
-Router
-  .create({
-    routes: AppRoutes,
-    scrollBehavior: Router.ScrollToTopBehavior
-  })
-  .run(function (Handler) {
-    React.render(<Handler/>, document.body);
-  });
+const history = createHashHistory();
+const store = configureStore();
+
+React.render(
+  <Provider store={store}>
+    {() => <Router history={history} routes={routes}/>}
+  </Provider>,
+  document.body
+);
