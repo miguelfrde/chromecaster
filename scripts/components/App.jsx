@@ -1,11 +1,16 @@
 import React from 'react';
 import Router from 'react-router';
+import { connect } from 'react-redux';
 import { AppCanvas, Styles } from 'material-ui';
 import MenuBar from './MenuBar.jsx';
+import SettingsDialog from './SettingsDialog.jsx';
 
 const ThemeManager = new Styles.ThemeManager();
 const Colors = Styles.Colors;
 
+@connect(state => ({
+  settingsDialogVisible: state.settingsDialogVisible
+}))
 export default class App extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object
@@ -13,7 +18,8 @@ export default class App extends React.Component {
 
   static propTypes = {
     selectedTab: React.PropTypes.string,
-    children: React.PropTypes.node
+    children: React.PropTypes.node,
+    settingsDialogVisible: React.PropTypes.bool.isRequired
   }
 
   getChildContext() {
@@ -35,10 +41,12 @@ export default class App extends React.Component {
   }
 
   render() {
+    const { settingsDialogVisible } = this.props;
     return (
       <AppCanvas>
-        <MenuBar />
+        <MenuBar/>
         {this.props.children}
+        <SettingsDialog show={settingsDialogVisible}/>
       </AppCanvas>
     );
   }

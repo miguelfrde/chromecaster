@@ -1,12 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { RaisedButton, FontIcon, Styles } from 'material-ui';
 import SettingsDialog from './SettingsDialog.jsx';
 import Section from './Section.jsx';
+import { openSettingsDialog } from '../actions';
 
 const ThemeManager = new Styles.ThemeManager();
 const Colors = Styles.Colors;
 
 
+@connect(state => ({}))
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -17,6 +20,10 @@ export default class Home extends React.Component {
     muiTheme: React.PropTypes.object
   }
 
+  static propTypes = {
+    dispatch: React.PropTypes.func.isRequired
+  }
+
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
@@ -24,7 +31,7 @@ export default class Home extends React.Component {
   }
 
   _openSettings() {
-    this.refs.settingsModal.open();
+    this.props.dispatch(openSettingsDialog());
   }
 
   render() {
@@ -77,7 +84,6 @@ export default class Home extends React.Component {
             Built with {loveIcon} by miguelfrde
           </div>
         </div>
-        <SettingsDialog ref="settingsModal"/>
       </Section>
     );
   }

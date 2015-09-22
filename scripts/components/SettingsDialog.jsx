@@ -1,28 +1,39 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Router from 'react-router';
 import { Dialog, FlatButton, DropDownMenu } from 'material-ui';
+import { closeSettingsDialog } from '../actions';
 
 
+@connect(state => ({}))
 export default class SettingsDialog extends React.Component {
+  static propTypes = {
+    show: React.PropTypes.bool.isRequired,
+    dispatch: React.PropTypes.func.isRequired
+  }
+
   constructor(props) {
     super(props);
     this._handleCustomDialogClose = this._handleCustomDialogClose.bind(this);
     this._handleCustomDialogSave = this._handleCustomDialogSave.bind(this);
-    this.open = this.open.bind(this);
     this.getAvailableChromecasts = this.getAvailableChromecasts.bind(this);
   }
 
   _handleCustomDialogClose() {
     this.refs.dialog.dismiss();
+    this.props.dispatch(closeSettingsDialog());
   }
 
   _handleCustomDialogSave() {
     // TODO: locate chromecasts, select preferred chromecast
     this.refs.dialog.dismiss();
+    this.props.dispatch(closeSettingsDialog());
   }
 
-  open() {
-    this.refs.dialog.show();
+  componentDidUpdate() {
+    if (this.props.show) {
+      this.refs.dialog.show();
+    }
   }
 
   getAvailableChromecasts() {
@@ -36,6 +47,9 @@ export default class SettingsDialog extends React.Component {
   }
 
   render() {
+    if (!this.props.show) {
+      return null;
+    }
     const customActions = [
       <FlatButton
         label="Close"

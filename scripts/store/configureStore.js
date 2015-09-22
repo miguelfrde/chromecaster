@@ -5,8 +5,7 @@ import chromecastReducer from '../reducers';
 
 const logger = createLogger({
   level: 'info',
-  collapsed: true,
-  predicate: (getState, action) => action.type !== AUTH_REMOVE_TOKEN
+  collapsed: true
 });
 
 const createStoreWithMiddleware = applyMiddleware(

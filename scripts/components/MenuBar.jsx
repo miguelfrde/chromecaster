@@ -1,15 +1,20 @@
 import React from 'react';
 import Router from 'react-router';
+import { connect } from 'react-redux';
 import { AppBar, IconButton, AppCanvas, Styles, Tabs, Tab, Paper } from 'material-ui';
-import SettingsDialog from './SettingsDialog.jsx';
+import { openSettingsDialog } from '../actions';
 
 const { Colors, Spacing, Typography } = Styles;
 
-
+@connect(state => ({}))
 export default class MenuBar extends React.Component {
   static contextTypes = {
     history: React.PropTypes.object.isRequired,
     location: React.PropTypes.object.isRequired
+  }
+
+  static propTypes = {
+    dispatch: React.PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -30,7 +35,7 @@ export default class MenuBar extends React.Component {
   }
 
   openSettingsModal() {
-    this.refs.settingsModal.open();
+    this.props.dispatch(openSettingsDialog())
   }
 
   _getSelectedIndex() {
@@ -106,7 +111,6 @@ export default class MenuBar extends React.Component {
       <div>
         {this._appBar()}
         {this._tabs()}
-        <SettingsDialog ref="settingsModal"/>
       </div>
     );
   }
