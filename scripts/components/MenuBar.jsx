@@ -8,7 +8,8 @@ const { Colors, Spacing, Typography } = Styles;
 
 export default class MenuBar extends React.Component {
   static contextTypes = {
-    router: React.PropTypes.object
+    history: React.PropTypes.object.isRequired,
+    location: React.PropTypes.object.isRequired
   }
 
   constructor(props) {
@@ -33,9 +34,14 @@ export default class MenuBar extends React.Component {
   }
 
   _getSelectedIndex() {
+    return this.context.history.isActive('/photos') ? 'photos' :
+           this.context.history.isActive('/videos') ? 'videos' :
+           'home';
   }
 
   _handleTabChange(value, e, tab) {
+    this.context.history.pushState(null, '/' + value);
+    this.setState({tabIndex: this._getSelectedIndex()});
   }
 
   _tabs() {
@@ -68,7 +74,7 @@ export default class MenuBar extends React.Component {
              rounded={false}
              style={styles.root}>
         <div style={styles.container}>
-          <Tabs value={this._getSelectedIndex()}
+          <Tabs value={this.state.tabIndex}
                 onChange={this._handleTabChange}
                 styles={styles.tabs}>
             <Tab label="PHOTOS" value="photos" route="photos" style={styles.tab} />

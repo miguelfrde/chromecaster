@@ -7,10 +7,6 @@ const ThemeManager = new Styles.ThemeManager();
 const Colors = Styles.Colors;
 
 export default class App extends React.Component {
-  static contextTypes = {
-    router: React.PropTypes.object.isRequired
-  }
-
   static childContextTypes = {
     muiTheme: React.PropTypes.object
   }
