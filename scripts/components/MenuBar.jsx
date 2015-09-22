@@ -7,6 +7,11 @@ const { Colors, Spacing, Typography } = Styles;
 
 
 export default class MenuBar extends React.Component {
+  static contextTypes = {
+    history: React.PropTypes.object.isRequired,
+    location: React.PropTypes.object.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.openSettingsModal = this.openSettingsModal.bind(this);
@@ -29,12 +34,13 @@ export default class MenuBar extends React.Component {
   }
 
   _getSelectedIndex() {
-    return this.context.router.isActive('photos') ? 'photos' :
-      this.context.router.isActive('videos') ? 'videos' : 'home';
+    return this.context.history.isActive('/photos') ? 'photos' :
+           this.context.history.isActive('/videos') ? 'videos' :
+           'home';
   }
 
   _handleTabChange(value, e, tab) {
-    this.context.router.transitionTo(tab.props.route);
+    this.context.history.pushState(null, '/' + value);
     this.setState({tabIndex: this._getSelectedIndex()});
   }
 
@@ -105,12 +111,3 @@ export default class MenuBar extends React.Component {
     );
   }
 }
-
-
-MenuBar.contextTypes = {
-  router: React.PropTypes.func
-};
-
-MenuBar.propTypes = {
-  selectedTab: React.PropTypes.string
-};

@@ -13,6 +13,16 @@ export default class Home extends React.Component {
     this._openSettings = this._openSettings.bind(this);
   }
 
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object
+  }
+
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  }
+
   _openSettings() {
     this.refs.settingsModal.open();
   }
