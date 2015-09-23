@@ -20,19 +20,19 @@ export default class SettingsDialog extends React.Component {
   }
 
   _handleCustomDialogClose() {
-    this.refs.dialog.dismiss();
     this.props.dispatch(closeSettingsDialog());
   }
 
   _handleCustomDialogSave() {
     // TODO: locate chromecasts, select preferred chromecast
-    this.refs.dialog.dismiss();
     this.props.dispatch(closeSettingsDialog());
   }
 
   componentDidUpdate() {
     if (this.props.show) {
       this.refs.dialog.show();
+    } else {
+      this.refs.dialog.dismiss();
     }
   }
 
@@ -47,9 +47,6 @@ export default class SettingsDialog extends React.Component {
   }
 
   render() {
-    if (!this.props.show) {
-      return null;
-    }
     const customActions = [
       <FlatButton
         label="Close"
