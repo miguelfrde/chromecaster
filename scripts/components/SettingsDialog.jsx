@@ -67,7 +67,7 @@ export default class SettingsDialog extends React.Component {
               autoScrollBodyContent={true}
               modal={true}
               ref="dialog">
-        <div style={{height: '2000px'}}>
+        <div style={{height: 800}}>
           <p>Pick your chromecast:</p>
           <DropDownMenu menuItems={this.getAvailableChromecasts()} />
         </div>
