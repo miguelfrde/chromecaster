@@ -7,7 +7,6 @@ import createHashHistory from 'history/lib/createHashHistory';
 import configureStore from './store/configureStore.js';
 import routes from './routes.jsx';
 
-
 require('../style/main.scss');
 
 injectTapEventPlugin();
