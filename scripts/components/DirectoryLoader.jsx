@@ -44,6 +44,11 @@ export default class DirectoryLoader extends React.Component {
 
   render() {
     const styles  = {
+      container: {
+        width: '100%',
+        display: 'block',
+        float: 'left'
+      },
       dirName: {
         float: 'left'
       },
@@ -57,7 +62,7 @@ export default class DirectoryLoader extends React.Component {
     const pathName = path.basename(this.state.currentPath);
 
     return (
-      <div>
+      <div style={styles.container}>
         <h1 style={styles.dirName}>{pathName}</h1>
         <RaisedButton
           primary={true}
