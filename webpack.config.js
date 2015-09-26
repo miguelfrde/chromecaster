@@ -23,7 +23,13 @@ module.exports = {
     ]
   },
 
+  node: {
+    child_process: 'empty'
+  },
+
   plugins: [
     new webpack.HotModuleReplacementPlugin()
-  ]
+  ],
+
+  target: 'atom'
 }

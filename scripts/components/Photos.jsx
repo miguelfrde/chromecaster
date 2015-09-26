@@ -9,8 +9,9 @@ const ThemeManager = new Styles.ThemeManager();
 
 
 export default class Photos extends React.Component {
-  consturctor() {
-    this._handlePathChange = this._handlePathChange.bind(this);
+  constructor(props) {
+    super(props);
+    this._handleChangePath = this._handleChangePath.bind(this);
   }
 
   static childContextTypes = {
@@ -23,14 +24,15 @@ export default class Photos extends React.Component {
     };
   }
 
-  _handlePathChange(newPath) {
+  _handleChangePath(newPath) {
+    // TODO: dispatch SET_PHOTOS_PATH
     console.log(newPath);
   }
 
   render() {
     return (
       <Section>
-        <DirectoryLoader onPathChange={this._handlePathChange}/>
+        <DirectoryLoader onChangePath={this._handleChangePath}/>
         <CastButton/>
       </Section>
     );
