@@ -1,4 +1,5 @@
 import React from 'react';
+import path from 'path';
 import { RaisedButton, Styles } from 'material-ui';
 import remote from 'remote';
 
@@ -10,9 +11,8 @@ export default class DirectoryLoader extends React.Component {
   constructor(props) {
     super(props);
     this._handleOnClick = this._handleOnClick.bind(this);
+    this.state = { currentPath: this.props.initialPath };
   }
-
-  state = { currentPath: '/Users/miguel/Pictures' };
 
   static propTypes = {
     onChangePath: React.PropTypes.func.isRequired
@@ -36,6 +36,7 @@ export default class DirectoryLoader extends React.Component {
     }
     dialog.showOpenDialog(options, (directoriesChosen) => {
       if (directoriesChosen && directoriesChosen.length > 0) {
+        this.setState({ currentPath: directoriesChosen[0] });
         this.props.onChangePath(directoriesChosen[0]);
       }
     });
@@ -53,9 +54,11 @@ export default class DirectoryLoader extends React.Component {
       }
     };
 
+    const pathName = path.basename(this.state.currentPath);
+
     return (
       <div>
-        <h1 style={styles.dirName}>Directory name</h1>
+        <h1 style={styles.dirName}>{pathName}</h1>
         <RaisedButton
           primary={true}
           label="Change path"
