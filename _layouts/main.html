@@ -5,21 +5,23 @@
 <meta charset="UTF-8">
 <title>{{ site.title }}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" media="screen">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{{ site.css_path }}/stylesheet.css">
 
 <section class="main">
-  <h1>{{ site.title }}</h1>
-  <p>Your local photos and videos on your TV using Google Chromecast</p>
-  <img id="logo" alt="Chromecaster" src="{{ site.img_path }}/screen.png">
-  <h2 class="">Coming soon</h2>
+  <div id="paper"></div>
+  <div id="content">
+    <h1 id="title">{{ site.title }}</h1>
+    <p id="description">Your local photos and videos on your TV using Google Chromecast</p>
+    <img id="logo" alt="Chromecaster" src="{{ site.img_path }}/screen.png">
+    <h2 class="">Coming soon</h2>
+  </div>
 </section>
 
 <footer>
-  Built with <i class="fa fa-heart"></i> by <a href="http://www.miguelfrde.com">miguelfrde</a>
+  Built with <i class="fa fa-heart"></i> by <a href="http://www.miguelfrde.com">Miguel Flores</a>
 </footer>
 
 <script type="text/javascript">
