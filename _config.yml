@@ -1,0 +1,8 @@
+# Site settings
+baseurl: ""
+url: "http://miguelfrde.com/chromecaster"
+css_path: "stylesheets/"
+img_path: "public/images/"
+title: "Chromecaster"
+
+exclude: ["node_modules/"]
