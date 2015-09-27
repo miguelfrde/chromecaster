@@ -37,6 +37,7 @@ export default class Home extends React.Component {
   render() {
     const styles = {
       container: {
+        padding: 32,
         textAlign: 'center'
       },
       welcome: {
