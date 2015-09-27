@@ -5,7 +5,7 @@ import { Styles } from 'material-ui';
 import Section from './Section.jsx';
 import CastButton from './CastButton.jsx';
 import DirectoryLoader from './DirectoryLoader.jsx';
-
+import PhotosContainer from './PhotosContainer.jsx';
 import { updatePhotosPath } from '../actions';
 
 const ThemeManager = new Styles.ThemeManager();
@@ -18,7 +18,6 @@ export default class Photos extends React.Component {
   constructor(props) {
     super(props);
     this._handleChangePath = this._handleChangePath.bind(this);
-    this.extensions = ['.jpg', '.jpeg', '.png'];
   }
 
   static childContextTypes = {
@@ -40,6 +39,7 @@ export default class Photos extends React.Component {
     return (
       <Section>
         <DirectoryLoader onChangePath={this._handleChangePath} initialPath={photosPath} />
+        <PhotosContainer/>
         <CastButton/>
       </Section>
     );

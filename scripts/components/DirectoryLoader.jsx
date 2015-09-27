@@ -1,6 +1,6 @@
 import React from 'react';
 import path from 'path';
-import { RaisedButton, Styles } from 'material-ui';
+import { RaisedButton, Paper, Styles } from 'material-ui';
 import remote from 'remote';
 
 const dialog = remote.require('dialog');
@@ -47,7 +47,10 @@ export default class DirectoryLoader extends React.Component {
       container: {
         width: '100%',
         display: 'block',
-        float: 'left'
+        float: 'left',
+        backgroundColor: Styles.Colors.indigo400,
+        color: Styles.Colors.white,
+        padding: 32
       },
       dirName: {
         float: 'left'
@@ -62,14 +65,15 @@ export default class DirectoryLoader extends React.Component {
     const pathName = path.basename(this.state.currentPath);
 
     return (
-      <div style={styles.container}>
+      <Paper zDepth={2} rounded={false} style={styles.container}>
         <h1 style={styles.dirName}>{pathName}</h1>
         <RaisedButton
+          zDepth={3}
           primary={true}
           label="Change path"
           style={styles.pickerButton}
           onClick={this._handleOnClick}/>
-      </div>
+      </Paper>
     );
   }
 }

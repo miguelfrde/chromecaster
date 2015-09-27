@@ -2,16 +2,9 @@ import fs from 'fs';
 import path from 'path';
 
 export function filesInDirByExtensions(dirPath, extensions) {
-  return new Promise((resolve, reject) => {
-    const set = new Set(extensions);
-      fs.readdir(dirPath, (err, files) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(files.filter(file => set.has(path.extname(file))));
-        }
-    });
-  });
+  const set = new Set(extensions);
+  const files = fs.readdirSync(dirPath);
+  return files.filter(file => set.has(path.extname(file).toLowerCase()));
 }
 
 export function getUserHome() {

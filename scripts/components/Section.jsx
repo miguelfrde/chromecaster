@@ -4,7 +4,7 @@ import React from 'react';
 export default class Section extends React.Component {
   render() {
     const style = {
-      padding: 32,
+      height: '100%',
       marginTop: 64
     };
 
