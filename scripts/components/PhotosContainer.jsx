@@ -45,6 +45,7 @@ export default class PhotosContainer extends React.Component {
     }
     return (
       <div style={style.container}>
+        <div style={{marginTop: 20}}></div>
         { photos.map((photo, index) =>
           <PhotoItem key={index} path={path.join(this.props.photosPath, photo)}/>
         )}

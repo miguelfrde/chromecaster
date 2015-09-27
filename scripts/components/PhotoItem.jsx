@@ -25,6 +25,7 @@ export default class PhotoItem extends React.Component {
         width: '22%',
         margin: 20,
         marginLeft: 0,
+        marginTop: 0,
         display: 'inline-block',
         zIndex: -1,
         textAlign: 'center'
