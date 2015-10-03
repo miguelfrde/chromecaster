@@ -1,12 +1,19 @@
 import React from 'react';
 import path from 'path';
-import { Paper, Styles } from 'material-ui';
+import { FontIcon, Paper, Styles } from 'material-ui';
 
 const ThemeManager = new Styles.ThemeManager();
+const Colors = Styles.Colors;
 
-export default class MediaoItem extends React.Component {
+export default class MediaItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this._thumbnail = this._thumbnail.bind(this);
+  }
+
   static propTypes = {
-    path: React.PropTypes.string.isRequired
+    path: React.PropTypes.string.isRequired,
+    type: React.PropTypes.string.isRequired
   }
 
   static childContextTypes = {
@@ -17,6 +24,38 @@ export default class MediaoItem extends React.Component {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
+  }
+
+  _thumbnail() {
+    const styles = {
+      img: {
+        maxWidth: '100%',
+        zIndex: -1
+      },
+      icon: {
+        top: '25%',
+        fontSize: '6em'
+      }
+    }
+
+    switch (this.props.type) {
+      case 'photos':
+        return (
+          <img style={styles.img} src={this.props.path}/>
+        );
+      case 'videos':
+        return (
+          <FontIcon className="material-icons" style={styles.icon} color={Colors.indigo400}>
+            videocam
+          </FontIcon>
+        );
+      default:
+        return (
+          <FontIcon className="material-icons" style={styles.icon} color={Colors.indigo400}>
+            video library
+          </FontIcon>
+        );
+    }
   }
 
   render() {
@@ -31,15 +70,9 @@ export default class MediaoItem extends React.Component {
         textAlign: 'center',
         verticalAlign: 'middle'
       },
-      loading: {
-        margin: '60px 80px',
-        position: 'absolute',
-        display: 'block'
-      },
-      img: {
-        maxWidth: '100%',
+      thumbnailContainer: {
         height: 165,
-        zIndex: -1
+        verticalAlign: 'medium'
       },
       name: {
         textAlign: 'left',
@@ -49,7 +82,9 @@ export default class MediaoItem extends React.Component {
     };
     return (
       <Paper zDepth={1} style={styles.item}>
-        <img style={styles.img} src={this.props.path}/>
+        <div style={styles.thumbnailContainer}>
+          {this._thumbnail()}
+        </div>
         <p style={styles.name}>
           {path.basename(this.props.path, path.extname(this.props.path))}
         </p>
