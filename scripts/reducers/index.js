@@ -62,7 +62,7 @@ function settingsReducer(state = initialSettingsState, action) {
 
 function mediaReducer(state = initialMediaState, action) {
   const currentMedia = state.mediaType;
-  const numOfCurrentItems = state.media[currentMedia].items.length;
+  const currentItems = state.media[currentMedia].items.length;
   const currentIndex = state.selectedIndex;
 
   switch (action.type) {
@@ -81,15 +81,16 @@ function mediaReducer(state = initialMediaState, action) {
     });
   case SELECT_MEDIA_ITEM:
     return Object.assign({}, state, {
-      selectedIndex: action.index % numOfCurrentItems
+      selectedIndex: action.index % currentItems
     });
   case SELECT_NEXT_MEDIA_ITEM:
     return Object.assign({}, state, {
-      selectedIndex: (currentIndex + 1) % numOfCurrentItems
+      selectedIndex: (currentIndex + 1) % currentItems
     });
   case SELECT_PREVIOUS_MEDIA_ITEM:
+    const index = (((currentIndex - 1) % currentItems) + currentItems) % currentItems;
     return Object.assign({}, state, {
-      selectedIndex: (currentIndex - 1) % numOfCurrentItems
+      selectedIndex: index
     });
   default:
     return state;

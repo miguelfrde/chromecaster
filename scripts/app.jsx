@@ -6,6 +6,7 @@ import createHashHistory from 'history/lib/createHashHistory';
 
 import configureStore from './store/configureStore.js';
 import routes from './routes.jsx';
+import { selectPreviousMediaItem, selectNextMediaItem } from './actions';
 
 require('../style/main.scss');
 
@@ -13,6 +14,16 @@ injectTapEventPlugin();
 
 const history = createHashHistory();
 const store = configureStore();
+
+document.onkeydown = function (e) {
+  const action = {
+    "Left": selectPreviousMediaItem,
+    "Right": selectNextMediaItem,
+  };
+  if (action[e.keyIdentifier]) {
+    store.dispatch(action[e.keyIdentifier]());
+  }
+}
 
 React.render(
   <Provider store={store}>
