@@ -48,16 +48,16 @@ const initialMediaState = {
 
 function settingsReducer(state = initialSettingsState, action) {
   switch (action.type) {
-  case OPEN_SETTINGS_DIALOG:
-    return Object.assign({}, state, {
-      dialogOpen: true
-    });
-  case CLOSE_SETTINGS_DIALOG:
-    return Object.assign({}, state, {
-      dialogOpen: false
-    });
-  default:
-    return state;
+    case OPEN_SETTINGS_DIALOG:
+      return Object.assign({}, state, {
+        dialogOpen: true
+      });
+    case CLOSE_SETTINGS_DIALOG:
+      return Object.assign({}, state, {
+        dialogOpen: false
+      });
+    default:
+      return state;
   }
 }
 
@@ -68,50 +68,50 @@ function mediaReducer(state = initialMediaState, action) {
   const currentIndex = state.media[currentMedia].selectedIndex;
 
   switch (action.type) {
-  case UPDATE_MEDIA_PATH:
-    return Object.assign({}, state, {
-      media: Object.assign({}, state.media, {
-        [currentMedia]: Object.assign({}, state.media[currentMedia], {
-          path: action.path,
-          items: filesInPath(action.path, state.media[currentMedia].extensions)
+    case UPDATE_MEDIA_PATH:
+      return Object.assign({}, state, {
+        media: Object.assign({}, state.media, {
+          [currentMedia]: Object.assign({}, state.media[currentMedia], {
+            path: action.path,
+            items: filesInPath(action.path, state.media[currentMedia].extensions)
+          })
         })
-      })
-    });
+      });
 
-  case UPDATE_MEDIA_TYPE:
-    return Object.assign({}, state, {
-      mediaType: action.mediaType
-    });
+    case UPDATE_MEDIA_TYPE:
+      return Object.assign({}, state, {
+        mediaType: action.mediaType
+      });
 
-  case SELECT_MEDIA_ITEM:
-    return Object.assign({}, state, {
-      media: Object.assign({}, state.media, {
-        [currentMedia]: Object.assign({}, state.media[currentMedia], {
-          selectedIndex: action.index % currentItems
+    case SELECT_MEDIA_ITEM:
+      return Object.assign({}, state, {
+        media: Object.assign({}, state.media, {
+          [currentMedia]: Object.assign({}, state.media[currentMedia], {
+            selectedIndex: action.index % currentItems
+          })
         })
-      })
-    });
+      });
 
-  case SELECT_NEXT_MEDIA_ITEM:
-    return Object.assign({}, state, {
-      media: Object.assign({}, state.media, {
-        [currentMedia]: Object.assign({}, state.media[currentMedia], {
-          selectedIndex: (currentIndex + 1) % currentItems
+    case SELECT_NEXT_MEDIA_ITEM:
+      return Object.assign({}, state, {
+        media: Object.assign({}, state.media, {
+          [currentMedia]: Object.assign({}, state.media[currentMedia], {
+            selectedIndex: (currentIndex + 1) % currentItems
+          })
         })
-      })
-    });
+      });
 
-  case SELECT_PREVIOUS_MEDIA_ITEM:
-    const index = (((currentIndex - 1) % currentItems) + currentItems) % currentItems;
-    return Object.assign({}, state, {
-      media: Object.assign({}, state.media, {
-        [currentMedia]: Object.assign({}, state.media[currentMedia], {
-          selectedIndex: index
+    case SELECT_PREVIOUS_MEDIA_ITEM:
+      const index = (((currentIndex - 1) % currentItems) + currentItems) % currentItems;
+      return Object.assign({}, state, {
+        media: Object.assign({}, state.media, {
+          [currentMedia]: Object.assign({}, state.media[currentMedia], {
+            selectedIndex: index
+          })
         })
-      })
-    });
-  default:
-    return state;
+      });
+    default:
+      return state;
   }
 }
 
