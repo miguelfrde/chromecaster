@@ -15,7 +15,8 @@ export default class MediaContainer extends React.Component {
 
   static propTypes = {
     mediaFiles: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-    mediaType: React.PropTypes.string.isRequired
+    mediaType: React.PropTypes.string.isRequired,
+    mediaFileIndex: React.PropTypes.number.isRequired
   }
 
   getChildContext() {
@@ -39,7 +40,8 @@ export default class MediaContainer extends React.Component {
       <div style={style.container}>
         <div style={{marginTop: 20}}></div>
         { this.props.mediaFiles.map((file, index) =>
-          <MediaItem key={index} path={file} type={this.props.mediaType}/>
+            <MediaItem key={index} path={file} type={this.props.mediaType}
+                       selected={this.props.mediaFileIndex == index}/>
         )}
       </div>
     );

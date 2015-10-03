@@ -11,9 +11,18 @@ export default class MediaItem extends React.Component {
     this._thumbnail = this._thumbnail.bind(this);
   }
 
+  static defaultProps = {
+    selected: false
+  }
+
   static propTypes = {
     path: React.PropTypes.string.isRequired,
-    type: React.PropTypes.string.isRequired
+    type: React.PropTypes.string.isRequired,
+    selected: React.PropTypes.bool
+  }
+
+  static contextTypes = {
+    muiTheme: React.PropTypes.object
   }
 
   static childContextTypes = {
@@ -37,6 +46,9 @@ export default class MediaItem extends React.Component {
         fontSize: '6em'
       }
     }
+    const iconColor = (this.props.selected)?
+                      Colors.fullWhite :
+                      Colors.indigo400;
 
     switch (this.props.type) {
       case 'photos':
@@ -45,13 +57,13 @@ export default class MediaItem extends React.Component {
         );
       case 'videos':
         return (
-          <FontIcon className="material-icons" style={styles.icon} color={Colors.indigo400}>
+          <FontIcon className="material-icons" style={styles.icon} color={iconColor}>
             videocam
           </FontIcon>
         );
       default:
         return (
-          <FontIcon className="material-icons" style={styles.icon} color={Colors.indigo400}>
+          <FontIcon className="material-icons" style={styles.icon} color={iconColor}>
             video library
           </FontIcon>
         );
@@ -59,6 +71,10 @@ export default class MediaItem extends React.Component {
   }
 
   render() {
+    const color = (this.props.selected)? Colors.indigo400 : Colors.fullWhite;
+    const fontColor = (this.props.selected)?
+                      Colors.fullWhite :
+                      this.context.muiTheme.getCurrentTheme().palette.textColor;
     const styles = {
       item: {
         width: '22%',
@@ -68,18 +84,21 @@ export default class MediaItem extends React.Component {
         display: 'inline-block',
         zIndex: -1,
         textAlign: 'center',
-        verticalAlign: 'middle'
+        verticalAlign: 'middle',
+        backgroundColor: color
       },
       thumbnailContainer: {
         height: 165,
         verticalAlign: 'medium'
       },
       name: {
+        color: fontColor,
         textAlign: 'left',
         margin: 5,
         fontSize: '0.8rem'
       }
     };
+
     return (
       <Paper zDepth={1} style={styles.item}>
         <div style={styles.thumbnailContainer}>
