@@ -8,7 +8,7 @@ export const settingsSelector = state => {
 const currentMediaType = state => state.mediaReducer.mediaType;
 const currentMediaItems = state => state.mediaReducer.media[state.mediaReducer.mediaType].items;
 const currentMediaPath = state => state.mediaReducer.media[state.mediaReducer.mediaType].path;
-const currentIndex = state => state.mediaReducer.selectedIndex;
+const currentIndex = state => state.mediaReducer.media[state.mediaReducer.mediaType].selectedIndex;
 
 export const currentMediaSelector = createSelector(
   currentMediaType,

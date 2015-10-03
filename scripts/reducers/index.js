@@ -25,22 +25,24 @@ const initialMediaState = {
       path: settings.DEFAULT_PHOTOS_PATH,
       extensions: settings.PHOTOS_EXTENSIONS,
       items: filesInPath(settings.DEFAULT_PHOTOS_PATH,
-                         settings.PHOTOS_EXTENSIONS)
+                         settings.PHOTOS_EXTENSIONS),
+      selectedIndex: 0
     },
     videos: {
       path: settings.DEFAULT_VIDEOS_PATH,
       extensions: settings.VIDEOS_EXTENSIONS,
       items: filesInPath(settings.DEFAULT_VIDEOS_PATH,
-                         settings.VIDEOS_EXTENSIONS)
+                         settings.VIDEOS_EXTENSIONS),
+      selectedIndex: 0
     },
     nothing: {
       path: '',
       extensions: [],
-      items: []
+      items: [],
+      selectedIndex: 0
     }
   },
-  mediaType: 'nothing',
-  selectedIndex: 0
+  mediaType: 'nothing'
 };
 
 
@@ -63,7 +65,7 @@ function settingsReducer(state = initialSettingsState, action) {
 function mediaReducer(state = initialMediaState, action) {
   const currentMedia = state.mediaType;
   const currentItems = state.media[currentMedia].items.length;
-  const currentIndex = state.selectedIndex;
+  const currentIndex = state.media[currentMedia].selectedIndex;
 
   switch (action.type) {
   case UPDATE_MEDIA_PATH:
@@ -75,22 +77,38 @@ function mediaReducer(state = initialMediaState, action) {
         })
       })
     });
+
   case UPDATE_MEDIA_TYPE:
     return Object.assign({}, state, {
       mediaType: action.mediaType
     });
+
   case SELECT_MEDIA_ITEM:
     return Object.assign({}, state, {
-      selectedIndex: action.index % currentItems
+      media: Object.assign({}, state.media, {
+        [currentMedia]: Object.assign({}, state.media[currentMedia], {
+          selectedIndex: action.index % currentItems
+        })
+      })
     });
+
   case SELECT_NEXT_MEDIA_ITEM:
     return Object.assign({}, state, {
-      selectedIndex: (currentIndex + 1) % currentItems
+      media: Object.assign({}, state.media, {
+        [currentMedia]: Object.assign({}, state.media[currentMedia], {
+          selectedIndex: (currentIndex + 1) % currentItems
+        })
+      })
     });
+
   case SELECT_PREVIOUS_MEDIA_ITEM:
     const index = (((currentIndex - 1) % currentItems) + currentItems) % currentItems;
     return Object.assign({}, state, {
-      selectedIndex: index
+      media: Object.assign({}, state.media, {
+        [currentMedia]: Object.assign({}, state.media[currentMedia], {
+          selectedIndex: index
+        })
+      })
     });
   default:
     return state;
