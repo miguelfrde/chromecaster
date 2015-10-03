@@ -1,14 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import path from 'path';
 import { FontIcon, Paper, Styles } from 'material-ui';
+
+import { selectMediaItem } from '../actions';
 
 const ThemeManager = new Styles.ThemeManager();
 const Colors = Styles.Colors;
 
+
+@connect(state => ({}))
 export default class MediaItem extends React.Component {
   constructor(props) {
     super(props);
     this._thumbnail = this._thumbnail.bind(this);
+    this._handleOnClick = this._handleOnClick.bind(this);
   }
 
   static defaultProps = {
@@ -16,6 +22,8 @@ export default class MediaItem extends React.Component {
   }
 
   static propTypes = {
+    dispatch: React.PropTypes.func.isRequired,
+    index: React.PropTypes.number.isRequired,
     path: React.PropTypes.string.isRequired,
     type: React.PropTypes.string.isRequired,
     selected: React.PropTypes.bool
@@ -35,11 +43,18 @@ export default class MediaItem extends React.Component {
     };
   }
 
+  _handleOnClick() {
+    this.props.dispatch(selectMediaItem(this.props.index));
+  }
+
   _thumbnail() {
     const styles = {
       img: {
+        height: 165,
         maxWidth: '100%',
-        zIndex: -1
+        zIndex: -1,
+        transition: 'opacity 0.3s ease',
+        opacity: (this.props.selected)? 0.8 : 1.0
       },
       icon: {
         top: '25%',
@@ -85,13 +100,16 @@ export default class MediaItem extends React.Component {
         zIndex: -1,
         textAlign: 'center',
         verticalAlign: 'middle',
-        backgroundColor: color
+        backgroundColor: color,
+        transition: 'background 0.3s ease',
+        cursor: 'pointer'
       },
       thumbnailContainer: {
         height: 165,
         verticalAlign: 'medium'
       },
       name: {
+        transition: 'color 0.3s ease',
         color: fontColor,
         textAlign: 'left',
         margin: 5,
@@ -100,7 +118,7 @@ export default class MediaItem extends React.Component {
     };
 
     return (
-      <Paper zDepth={1} style={styles.item}>
+      <Paper zDepth={1} style={styles.item} onClick={this._handleOnClick}>
         <div style={styles.thumbnailContainer}>
           {this._thumbnail()}
         </div>

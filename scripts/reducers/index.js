@@ -9,7 +9,9 @@ import {
   CLOSE_SETTINGS_DIALOG,
   UPDATE_MEDIA_PATH,
   UPDATE_MEDIA_TYPE,
-  SELECT_NEXT_MEDIA_ITEM
+  SELECT_MEDIA_ITEM,
+  SELECT_NEXT_MEDIA_ITEM,
+  SELECT_PREVIOUS_MEDIA_ITEM
 } from '../actions';
 
 
@@ -61,6 +63,7 @@ function settingsReducer(state = initialSettingsState, action) {
 function mediaReducer(state = initialMediaState, action) {
   const currentMedia = state.mediaType;
   const numOfCurrentItems = state.media[currentMedia].items.length;
+  const currentIndex = state.selectedIndex;
 
   switch (action.type) {
   case UPDATE_MEDIA_PATH:
@@ -76,9 +79,17 @@ function mediaReducer(state = initialMediaState, action) {
     return Object.assign({}, state, {
       mediaType: action.mediaType
     });
+  case SELECT_MEDIA_ITEM:
+    return Object.assign({}, state, {
+      selectedIndex: action.index % numOfCurrentItems
+    });
   case SELECT_NEXT_MEDIA_ITEM:
     return Object.assign({}, state, {
       selectedIndex: (currentIndex + 1) % numOfCurrentItems
+    });
+  case SELECT_PREVIOUS_MEDIA_ITEM:
+    return Object.assign({}, state, {
+      selectedIndex: (currentIndex - 1) % numOfCurrentItems
     });
   default:
     return state;
