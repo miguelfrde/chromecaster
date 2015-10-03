@@ -2,7 +2,7 @@ import React from 'react';
 import Router from 'react-router';
 import { connect } from 'react-redux';
 import { AppBar, IconButton, AppCanvas, Styles, Tabs, Tab, Paper } from 'material-ui';
-import { openSettingsDialog } from '../actions';
+import { openSettingsDialog, updateMediaType } from '../actions';
 
 const { Colors, Spacing, Typography } = Styles;
 
@@ -46,6 +46,7 @@ export default class MenuBar extends React.Component {
 
   _handleTabChange(value, e, tab) {
     this.context.history.pushState(null, '/' + value);
+    this.props.dispatch(updateMediaType(value));
     this.setState({tabIndex: this._getSelectedIndex()});
   }
 

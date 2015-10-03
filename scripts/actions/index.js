@@ -1,7 +1,8 @@
 export const OPEN_SETTINGS_DIALOG = 'OPEN_SETTINGS_DIALOG';
 export const CLOSE_SETTINGS_DIALOG = 'CLOSE_SETTINGS_DIALOG';
-export const UPDATE_PHOTOS_PATH = 'UPDATE_PHOTOS_PATH';
-export const UPDATE_VIDEOS_PATH = 'UPDATE_VIDEOS_PATH';
+export const UPDATE_MEDIA_PATH = 'UPDATE_MEDIA_PATH';
+export const UPDATE_MEDIA_TYPE = 'UPDATE_MEDIA_TYPE';
+export const SELECT_NEXT_MEDIA_ITEM = 'SELECT_NEXT_MEDIA_ITEM';
 
 export function openSettingsDialog() {
   return {
@@ -15,16 +16,22 @@ export function closeSettingsDialog() {
   };
 }
 
-export function updatePhotosPath(path) {
+export function updateMediaPath(path) {
   return {
-    type: UPDATE_PHOTOS_PATH,
+    type: UPDATE_MEDIA_PATH,
     path: path
   };
 }
 
-export function updateVideosPath(path) {
+export function updateMediaType(mediaType) {
   return {
-    type: UPDATE_VIDEOS_PATH,
-    path: path
+    type: UPDATE_MEDIA_TYPE,
+    mediaType: mediaType
+  };
+}
+
+export function selectNextMediaItem() {
+  return {
+    type: SELECT_NEXT_MEDIA_ITEM
   };
 }

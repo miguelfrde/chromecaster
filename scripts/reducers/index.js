@@ -1,43 +1,94 @@
 import { combineReducers } from 'redux';
+import { createSelector } from 'reselect';
 
 import settings from '../settings';
+import { filesInPath } from '../utils';
 
 import {
   OPEN_SETTINGS_DIALOG,
   CLOSE_SETTINGS_DIALOG,
-  UPDATE_PHOTOS_PATH,
-  UPDATE_VIDEOS_PATH
+  UPDATE_MEDIA_PATH,
+  UPDATE_MEDIA_TYPE,
+  SELECT_NEXT_MEDIA_ITEM
 } from '../actions';
 
-function settingsDialogVisible(state = false, action) {
+
+const initialSettingsState = {
+  dialogOpen: false
+};
+
+const initialMediaState = {
+  media: {
+    photos: {
+      path: settings.DEFAULT_PHOTOS_PATH,
+      extensions: settings.PHOTOS_EXTENSIONS,
+      items: filesInPath(settings.DEFAULT_PHOTOS_PATH,
+                         settings.PHOTOS_EXTENSIONS)
+    },
+    videos: {
+      path: settings.DEFAULT_VIDEOS_PATH,
+      extensions: settings.VIDEOS_EXTENSIONS,
+      items: filesInPath(settings.DEFAULT_VIDEOS_PATH,
+                         settings.VIDEOS_EXTENSIONS)
+    },
+    nothing: {
+      path: '',
+      extensions: [],
+      items: []
+    }
+  },
+  mediaType: 'nothing',
+  selectedIndex: 0
+};
+
+
+function settingsReducer(state = initialSettingsState, action) {
   switch (action.type) {
   case OPEN_SETTINGS_DIALOG:
-    return true;
+    return Object.assign({}, state, {
+      dialogOpen: true
+    });
   case CLOSE_SETTINGS_DIALOG:
-    return false;
+    return Object.assign({}, state, {
+      dialogOpen: false
+    });
   default:
     return state;
   }
 }
 
-function photosPath(state = settings.DEFAULT_PHOTOS_PATH, action) {
-  if (action.type === UPDATE_PHOTOS_PATH) {
-    return action.path;
+
+function mediaReducer(state = initialMediaState, action) {
+  const currentMedia = state.mediaType;
+  const numOfCurrentItems = state.media[currentMedia].items.length;
+
+  switch (action.type) {
+  case UPDATE_MEDIA_PATH:
+    return Object.assign({}, state, {
+      media: Object.assign({}, state.media, {
+        [currentMedia]: Object.assign({}, state.media[currentMedia], {
+          path: action.path,
+          items: filesInPath(action.path, state.media[currentMedia].extensions)
+        })
+      })
+    });
+  case UPDATE_MEDIA_TYPE:
+    return Object.assign({}, state, {
+      mediaType: action.mediaType
+    });
+  case SELECT_NEXT_MEDIA_ITEM:
+    return Object.assign({}, state, {
+      selectedIndex: (currentIndex + 1) % numOfCurrentItems
+    });
+  default:
+    return state;
   }
-  return state;
 }
 
-function videosPath(state = settings.DEFAULT_VIDEOS_PATH, action) {
-  if (action.type === UPDATE_VIDEOS_PATH) {
-    return action.path;
-  }
-  return state;
-}
 
 const chromecastReducer = combineReducers({
-  settingsDialogVisible,
-  photosPath,
-  videosPath
+  settingsReducer,
+  mediaReducer
 });
 
 export default chromecastReducer;

@@ -1,21 +1,25 @@
 import React from 'react';
 import path from 'path';
+import { connect } from 'react-redux';
 import { RaisedButton, Paper, Styles } from 'material-ui';
 import remote from 'remote';
+
+import { updateMediaPath } from '../actions';
+import { currentMediaSelector } from '../selectors';
 
 const dialog = remote.require('dialog');
 const ThemeManager = new Styles.ThemeManager();
 
 
+@connect(currentMediaSelector)
 export default class DirectoryLoader extends React.Component {
   constructor(props) {
     super(props);
     this._handleOnClick = this._handleOnClick.bind(this);
-    this.state = { currentPath: this.props.initialPath };
   }
 
   static propTypes = {
-    onChangePath: React.PropTypes.func.isRequired
+   mediaPath: React.PropTypes.string.isRequired
   }
 
   static childContextTypes = {
@@ -31,13 +35,12 @@ export default class DirectoryLoader extends React.Component {
   _handleOnClick() {
     const options = {
       title: 'Choose media directory',
-      defaultPath: this.state.currentPath,
+      defaultPath: this.props.mediaPath,
       properties: ['openDirectory']
     }
     dialog.showOpenDialog(options, (directoriesChosen) => {
       if (directoriesChosen && directoriesChosen.length > 0) {
-        this.setState({ currentPath: directoriesChosen[0] });
-        this.props.onChangePath(directoriesChosen[0]);
+        this.props.dispatch(updateMediaPath(directoriesChosen[0]));
       }
     });
   }
@@ -62,7 +65,7 @@ export default class DirectoryLoader extends React.Component {
       }
     };
 
-    const pathName = path.basename(this.state.currentPath);
+    const pathName = path.basename(this.props.mediaPath);
 
     return (
       <Paper zDepth={2} rounded={false} style={styles.container}>

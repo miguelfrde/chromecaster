@@ -4,13 +4,12 @@ import { connect } from 'react-redux';
 import { AppCanvas, Styles } from 'material-ui';
 import MenuBar from './MenuBar.jsx';
 import SettingsDialog from './SettingsDialog.jsx';
+import { settingsSelector } from '../selectors';
 
 const ThemeManager = new Styles.ThemeManager();
 const Colors = Styles.Colors;
 
-@connect(state => ({
-  settingsDialogVisible: state.settingsDialogVisible
-}))
+@connect(settingsSelector)
 export default class App extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object
