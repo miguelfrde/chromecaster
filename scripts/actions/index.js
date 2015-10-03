@@ -1,5 +1,9 @@
 export const OPEN_SETTINGS_DIALOG = 'OPEN_SETTINGS_DIALOG';
 export const CLOSE_SETTINGS_DIALOG = 'CLOSE_SETTINGS_DIALOG';
+export const SET_CHANGE_MEDIA_ITEM_WHEN_CASTING = 'SET_CHANGE_MEDIA_ITEM_WHEN_CASTING';
+
+export const TOGGLE_CASTING = 'TOGGLE_CASTING';
+
 export const UPDATE_MEDIA_PATH = 'UPDATE_MEDIA_PATH';
 export const UPDATE_MEDIA_TYPE = 'UPDATE_MEDIA_TYPE';
 export const SELECT_MEDIA_ITEM = 'SELECT_MEDIA_ITEM';
@@ -15,6 +19,19 @@ export function openSettingsDialog() {
 export function closeSettingsDialog() {
   return {
     type: CLOSE_SETTINGS_DIALOG
+  };
+}
+
+export function setChangeMediaItemWhenCasting(seconds) {
+  return {
+    type: SET_CHANGE_MEDIA_ITEM_WHEN_CASTING,
+    seconds: seconds
+  };
+}
+
+export function toggleCasting() {
+  return {
+    type: TOGGLE_CASTING
   };
 }
 

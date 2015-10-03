@@ -1,30 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Router from 'react-router';
-import { Dialog, FlatButton, DropDownMenu } from 'material-ui';
+import { Dialog, FlatButton } from 'material-ui';
+
+import ChromecastPicker from './settings/ChromecastPicker.jsx';
+import AutoChangeMediaSelector from './settings/AutoChangeMediaSelector.jsx';
 import { closeSettingsDialog } from '../actions';
+import { settingsSelector } from '../selectors';
 
 
-@connect(state => ({}))
+@connect(settingsSelector)
 export default class SettingsDialog extends React.Component {
+  constructor(props) {
+    super(props);
+    this._handleCustomDialogClose = this._handleCustomDialogClose.bind(this);
+  }
+
   static propTypes = {
     show: React.PropTypes.bool.isRequired,
     dispatch: React.PropTypes.func.isRequired
   }
 
-  constructor(props) {
-    super(props);
-    this._handleCustomDialogClose = this._handleCustomDialogClose.bind(this);
-    this._handleCustomDialogSave = this._handleCustomDialogSave.bind(this);
-    this.getAvailableChromecasts = this.getAvailableChromecasts.bind(this);
-  }
-
   _handleCustomDialogClose() {
-    this.props.dispatch(closeSettingsDialog());
-  }
-
-  _handleCustomDialogSave() {
-    // TODO: locate chromecasts, select preferred chromecast
     this.props.dispatch(closeSettingsDialog());
   }
 
@@ -36,16 +33,6 @@ export default class SettingsDialog extends React.Component {
     }
   }
 
-  getAvailableChromecasts() {
-    return [
-      { payload: '1', text: 'Chromecast one' },
-      { payload: '2', text: 'Chromecast two' },
-      { payload: '3', text: 'Chromecast three' },
-      { payload: '4', text: 'Chromecast four' },
-      { payload: '5', text: 'Chromecast five' }
-    ];
-  }
-
   render() {
     const customActions = [
       <FlatButton
@@ -53,11 +40,6 @@ export default class SettingsDialog extends React.Component {
         secondary={true}
         onTouchTap={this._handleCustomDialogClose}
         key="close"/>,
-      <FlatButton
-        label="Save"
-        primary={true}
-        onTouchTap={this._handleCustomDialogSave}
-        key="save"/>
     ];
 
     return (
@@ -68,8 +50,8 @@ export default class SettingsDialog extends React.Component {
               modal={true}
               ref="dialog">
         <div style={{height: 800}}>
-          <p>Pick your chromecast:</p>
-          <DropDownMenu menuItems={this.getAvailableChromecasts()} />
+          <ChromecastPicker/>
+          <AutoChangeMediaSelector/>
         </div>
       </Dialog>
     );

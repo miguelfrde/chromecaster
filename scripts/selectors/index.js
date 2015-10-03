@@ -2,8 +2,15 @@ import path from 'path';
 import { createSelector } from 'reselect';
 
 export const settingsSelector = state => {
-  return { settingsDialogVisible: state.settingsReducer.dialogOpen };
+  return {
+    settingsDialogVisible: state.settingsReducer.dialogOpen,
+    changeMediaItemSeconds: state.settingsReducer.changeMediaItemSeconds
+  };
 };
+
+export const castingSelector = state => {
+  return { casting: state.castingReducer.casting };
+}
 
 const currentMediaType = state => state.mediaReducer.mediaType;
 const currentMediaItems = state => state.mediaReducer.media[state.mediaReducer.mediaType].items;

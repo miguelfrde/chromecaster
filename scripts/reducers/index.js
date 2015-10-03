@@ -7,6 +7,8 @@ import { filesInPath } from '../utils';
 import {
   OPEN_SETTINGS_DIALOG,
   CLOSE_SETTINGS_DIALOG,
+  SET_CHANGE_MEDIA_ITEM_WHEN_CASTING,
+  TOGGLE_CASTING,
   UPDATE_MEDIA_PATH,
   UPDATE_MEDIA_TYPE,
   SELECT_MEDIA_ITEM,
@@ -16,8 +18,13 @@ import {
 
 
 const initialSettingsState = {
-  dialogOpen: false
+  dialogOpen: false,
+  changeMediaItemSeconds: 0
 };
+
+const initialCastingState = {
+  casting: false
+}
 
 const initialMediaState = {
   media: {
@@ -56,6 +63,22 @@ function settingsReducer(state = initialSettingsState, action) {
       return Object.assign({}, state, {
         dialogOpen: false
       });
+    case SET_CHANGE_MEDIA_ITEM_WHEN_CASTING:
+      return Object.assign({}, state, {
+        changeMediaItemSeconds: action.seconds
+      });
+    default:
+      return state;
+  }
+}
+
+
+function castingReducer(state = initialCastingState, action) {
+  switch (action.type) {
+    case TOGGLE_CASTING:
+      return Object.assign({}, state, {
+        casting: !state.casting
+      })
     default:
       return state;
   }
@@ -118,6 +141,7 @@ function mediaReducer(state = initialMediaState, action) {
 
 const chromecastReducer = combineReducers({
   settingsReducer,
+  castingReducer,
   mediaReducer
 });
 
