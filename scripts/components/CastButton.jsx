@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FloatingActionButton, FontIcon, Styles } from 'material-ui'
 
-import { toggleCasting, selectNextMediaItem } from '../actions';
+import { toggleCasting, selectNextMediaItem, notify } from '../actions';
 import { castingSelector } from '../selectors';
 
 
@@ -44,6 +44,15 @@ export default class CastButton extends React.Component {
           this._mediaItemChanger();
         }
       }, this.props.changeMediaItemSeconds * 1000);
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.casting) {
+      const message = (this.props.changeMediaItemSeconds)?
+                      ` with slideshow of ${this.props.changeMediaItemSeconds} seconds` :
+                      '';
+      this.props.dispatch(notify(`Casting began ${message}`));
     }
   }
 

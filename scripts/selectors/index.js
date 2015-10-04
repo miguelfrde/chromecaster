@@ -15,6 +15,13 @@ export const castingSelector = state => {
   };
 }
 
+export const notificationSelector = state => {
+  return {
+    message: state.notificationReducer.message,
+    visible: state.notificationReducer.visible
+  };
+}
+
 const currentMediaType = state => state.mediaReducer.mediaType;
 const currentMediaItems = state => state.mediaReducer.media[state.mediaReducer.mediaType].items;
 const currentMediaPath = state => state.mediaReducer.media[state.mediaReducer.mediaType].path;

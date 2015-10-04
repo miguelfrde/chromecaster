@@ -2,6 +2,8 @@ import React from 'react';
 import Router from 'react-router';
 import { connect } from 'react-redux';
 import { AppCanvas, Styles } from 'material-ui';
+
+import Notification from './Notification.jsx';
 import MenuBar from './MenuBar.jsx';
 import SettingsDialog from './SettingsDialog.jsx';
 import { settingsSelector } from '../selectors';
@@ -46,6 +48,7 @@ export default class App extends React.Component {
         <MenuBar/>
         {this.props.children}
         <SettingsDialog show={settingsDialogVisible}/>
+        <Notification/>
       </AppCanvas>
     );
   }

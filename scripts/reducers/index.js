@@ -13,7 +13,8 @@ import {
   UPDATE_MEDIA_TYPE,
   SELECT_MEDIA_ITEM,
   SELECT_NEXT_MEDIA_ITEM,
-  SELECT_PREVIOUS_MEDIA_ITEM
+  SELECT_PREVIOUS_MEDIA_ITEM,
+  SHOW_NOTIFICATION
 } from '../actions';
 
 
@@ -24,6 +25,11 @@ const initialSettingsState = {
 
 const initialCastingState = {
   casting: false
+}
+
+const initialNotificationState = {
+  message: '',
+  visible: false
 }
 
 const initialMediaState = {
@@ -85,6 +91,18 @@ function castingReducer(state = initialCastingState, action) {
 }
 
 
+function notificationReducer(state = initialNotificationState, action) {
+  switch (action.type) {
+    case SHOW_NOTIFICATION:
+      return { message: action.message, visible: true };
+    default:
+      return Object.assign({}, state, {
+        visible: false
+      });
+  }
+}
+
+
 function mediaReducer(state = initialMediaState, action) {
   const currentMedia = state.mediaType;
   const currentItems = state.media[currentMedia].items.length;
@@ -142,7 +160,8 @@ function mediaReducer(state = initialMediaState, action) {
 const chromecastReducer = combineReducers({
   settingsReducer,
   castingReducer,
-  mediaReducer
+  mediaReducer,
+  notificationReducer
 });
 
 export default chromecastReducer;

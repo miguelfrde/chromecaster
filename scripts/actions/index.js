@@ -10,6 +10,9 @@ export const SELECT_MEDIA_ITEM = 'SELECT_MEDIA_ITEM';
 export const SELECT_NEXT_MEDIA_ITEM = 'SELECT_NEXT_MEDIA_ITEM';
 export const SELECT_PREVIOUS_MEDIA_ITEM = 'SELECT_PREVIOUS_MEDIA_ITEM';
 
+export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION';
+export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION';
+
 export function openSettingsDialog() {
   return {
     type: OPEN_SETTINGS_DIALOG
@@ -65,5 +68,18 @@ export function selectNextMediaItem() {
 export function selectPreviousMediaItem() {
   return {
     type: SELECT_PREVIOUS_MEDIA_ITEM
+  };
+}
+
+export function notify(message) {
+  return {
+    type: SHOW_NOTIFICATION,
+    message: message
+  };
+}
+
+export function hideNotification() {
+  return {
+    type: HIDE_NOTIFICATION
   };
 }
