@@ -53,6 +53,8 @@ export default class CastButton extends React.Component {
                       ` with slideshow of ${this.props.changeMediaItemSeconds} seconds` :
                       '';
       this.props.dispatch(notify(`Casting began ${message}`));
+
+      this._mediaItemChanger();
     }
   }
 
@@ -63,8 +65,6 @@ export default class CastButton extends React.Component {
       bottom: 32,
       right: 32
     };
-
-    this._mediaItemChanger();
 
     return (
       <FloatingActionButton onTouchTap={this._handleClick} style={style}>
