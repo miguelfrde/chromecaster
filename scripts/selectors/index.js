@@ -9,7 +9,10 @@ export const settingsSelector = state => {
 };
 
 export const castingSelector = state => {
-  return { casting: state.castingReducer.casting };
+  return {
+    casting: state.castingReducer.casting,
+    changeMediaItemSeconds: state.settingsReducer.changeMediaItemSeconds
+  };
 }
 
 const currentMediaType = state => state.mediaReducer.mediaType;
