@@ -21,7 +21,7 @@ app.on('ready', function() {
     resizable: false,
     icon: __dirname + 'images/chromecaster.png'
   });
-  mainWindow.loadUrl('file://' + __dirname + '/public/index.html');
+  mainWindow.loadUrl('file://' + __dirname + '/index.html');
   mainWindow.on('closed', function() {
     mainWindow = null;
   });

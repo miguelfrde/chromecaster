@@ -8,5 +8,7 @@ Built with [Electron](http://electron.atom.io/), [React](https://facebook.github
 ## Setting up for development
 
 1. `npm install`
-2. `npm run watch`
-3. `npm start`
+2. `npm start`
+
+
+To build the app: `npm run build`

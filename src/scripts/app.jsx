@@ -8,8 +8,6 @@ import configureStore from './store/configureStore.js';
 import routes from './routes.jsx';
 import { selectPreviousMediaItem, selectNextMediaItem } from './actions';
 
-require('../style/main.scss');
-
 injectTapEventPlugin();
 
 const history = createHashHistory();

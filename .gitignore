@@ -26,10 +26,8 @@ node_modules
 
 # Compiled sources and binaries
 build/*
-cache/*
-compile/*
+dist/*
 !build/.gitkeep
-!compile/.gitkeep
-!cache/.gitkeep
+!dist/.gitkeep
 
 _site/

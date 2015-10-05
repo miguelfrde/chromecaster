@@ -2,11 +2,11 @@ import React from 'react';
 import path from 'path';
 import { connect } from 'react-redux';
 import { RaisedButton, Paper, Styles } from 'material-ui';
-import remote from 'remote';
 
 import { updateMediaPath } from '../actions';
 import { currentMediaSelector } from '../selectors';
 
+const remote = window.require('remote');
 const dialog = remote.require('dialog');
 const ThemeManager = new Styles.ThemeManager();
 
