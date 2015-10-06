@@ -8,6 +8,7 @@ import {
   OPEN_SETTINGS_DIALOG,
   CLOSE_SETTINGS_DIALOG,
   SET_CHANGE_MEDIA_ITEM_WHEN_CASTING,
+  UPDATE_AVAILABLE_CHROMECASTS,
   TOGGLE_CASTING,
   UPDATE_MEDIA_PATH,
   UPDATE_MEDIA_TYPE,
@@ -20,7 +21,9 @@ import {
 
 const initialSettingsState = {
   dialogOpen: false,
-  changeMediaItemSeconds: 0
+  changeMediaItemSeconds: 0,
+  availableChromecasts: [],
+  selectedChromecast: 0
 };
 
 const initialCastingState = {
@@ -65,14 +68,22 @@ function settingsReducer(state = initialSettingsState, action) {
       return Object.assign({}, state, {
         dialogOpen: true
       });
+
     case CLOSE_SETTINGS_DIALOG:
       return Object.assign({}, state, {
         dialogOpen: false
       });
+
     case SET_CHANGE_MEDIA_ITEM_WHEN_CASTING:
       return Object.assign({}, state, {
         changeMediaItemSeconds: action.seconds
       });
+
+    case UPDATE_AVAILABLE_CHROMECASTS:
+      return Object.assign({}, state, {
+        availableChromecasts: action.chromecasts
+      });
+
     default:
       return state;
   }

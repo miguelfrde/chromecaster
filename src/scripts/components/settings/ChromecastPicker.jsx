@@ -1,22 +1,36 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { DropDownMenu, FlatButton } from 'material-ui';
 
+import ChromecastService from '../../services/ChromecastService.js';
+import { updateAvailableChromecasts } from '../../actions';
 
+
+@connect(state => ({}))
 export default class ChromecastPicker extends React.Component {
   constructor(props) {
     super(props);
-    this._getAvailableChromecasts = this._getAvailableChromecasts.bind(this);
+    this._getChromecastItems = this._getChromecastItems.bind(this);
+    this._refresh = this._refresh.bind(this);
+    this.state = { disabled: false };
   }
 
-  _getAvailableChromecasts() {
-    // TODO: get real chromecasts
-    return [
-      { payload: '1', text: 'Chromecast one' },
-      { payload: '2', text: 'Chromecast two' },
-      { payload: '3', text: 'Chromecast three' },
-      { payload: '4', text: 'Chromecast four' },
-      { payload: '5', text: 'Chromecast five' }
-    ];
+  static propTypes = {
+    chromecasts: React.PropTypes.array.isRequired,
+    dispatch: React.PropTypes.func.isRequired
+  }
+
+  _getChromecastItems() {
+    const players = this.props.chromecasts;
+    if (players.length > 0) {
+      return players.map((player, index) => ({ payload: index, text: player.name }));
+    }
+    return [{ payload: 1, text: 'There are no chromecasts available'}];
+  }
+
+  _refresh() {
+    const players = ChromecastService.availableChromecasts();
+    this.props.dispatch(updateAvailableChromecasts(players));
   }
 
   render() {
@@ -30,9 +44,14 @@ export default class ChromecastPicker extends React.Component {
       <div className="chromecastPicker" style={styles.container}>
         <p>Pick your chromecast:</p>
         <DropDownMenu
-          menuItems={this._getAvailableChromecasts()}
-          style={styles.dropdown}/>
-        <FlatButton label="Refresh" primary={true} style={styles.refreshBtn}/>
+          menuItems={this._getChromecastItems()}
+          style={styles.dropdown}
+          disabled={this.props.chromecasts.length === 0}/>
+        <FlatButton
+          label="Refresh"
+          primary={true}
+          style={styles.refreshBtn}
+          onClick={this._refresh}/>
       </div>
     );
   }

@@ -7,7 +7,7 @@ import { settingsSelector } from '../../selectors';
 import settings from '../../settings.js';
 
 
-@connect(settingsSelector)
+@connect(state => ({}))
 export default class AutoChangeMediaSelector extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +18,7 @@ export default class AutoChangeMediaSelector extends React.Component {
 
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
-    changeMediaItemSeconds: React.PropTypes.number.isRequired
+    seconds: React.PropTypes.number.isRequired
   }
 
   _changeOptions() {
@@ -51,12 +51,12 @@ export default class AutoChangeMediaSelector extends React.Component {
         marginLeft: 5,
         marginTop: -15,
         transition: 'opacity 0.5s ease',
-        opacity: (this.props.changeMediaItemSeconds > 0)? 1.0 : 0
+        opacity: (this.props.seconds > 0)? 1.0 : 0
       }
     };
 
-    const autoChangeSeconds = (this.props.changeMediaItemSeconds && 'yes') || 'no';
-    const selectedSeconds = this.props.changeMediaItemSeconds || settings.AUTO_CHANGE_TIMES[0];
+    const autoChangeSeconds = (this.props.seconds && 'yes') || 'no';
+    const selectedSeconds = this.props.seconds || settings.AUTO_CHANGE_TIMES[0];
 
     return (
       <div>

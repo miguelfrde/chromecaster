@@ -6,7 +6,10 @@ import createHashHistory from 'history/lib/createHashHistory';
 
 import configureStore from './store/configureStore.js';
 import routes from './routes.jsx';
-import { selectPreviousMediaItem, selectNextMediaItem } from './actions';
+import ChromecastService from './services/ChromecastService.js';
+import { selectPreviousMediaItem,
+         selectNextMediaItem,
+         updateAvailableChromecasts } from './actions';
 
 injectTapEventPlugin();
 
@@ -22,6 +25,9 @@ document.onkeydown = function (e) {
     store.dispatch(action[e.keyIdentifier]());
   }
 }
+
+ChromecastService.watch(
+  players => store.dispatch(updateAvailableChromecasts(players)));
 
 React.render(
   <Provider store={store}>

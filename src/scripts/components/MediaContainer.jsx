@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { Styles } from 'material-ui';
 
 import MediaItem from './MediaItem.jsx';
+import CastingController from './CastingController.jsx';
 import { currentMediaSelector } from '../selectors';
 
 const ThemeManager = new Styles.ThemeManager();
+
 
 @connect(currentMediaSelector)
 export default class MediaContainer extends React.Component {
@@ -16,7 +18,8 @@ export default class MediaContainer extends React.Component {
   static propTypes = {
     mediaFiles: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
     mediaType: React.PropTypes.string.isRequired,
-    mediaFileIndex: React.PropTypes.number.isRequired
+    mediaFileIndex: React.PropTypes.number.isRequired,
+    selectedMediaFile: React.PropTypes.string.isRequired
   }
 
   getChildContext() {
@@ -36,14 +39,18 @@ export default class MediaContainer extends React.Component {
         padding: '0 3%'
       }
     }
+
+    const items = (
+      this.props.mediaFiles.map((file, index) =>
+        <MediaItem key={index} index={index} path={file}
+                   type={this.props.mediaType}
+                   selected={this.props.mediaFileIndex == index}/>
+    ));
+
     return (
       <div style={style.container}>
-        <div style={{marginTop: 20}}></div>
-        { this.props.mediaFiles.map((file, index) =>
-            <MediaItem key={index} index={index} path={file}
-                       type={this.props.mediaType}
-                       selected={this.props.mediaFileIndex == index}/>
-        )}
+        <CastingController castFile={this.props.selectedMediaFile} style={{marginTop: 20}}/>
+        {items}
       </div>
     );
   }

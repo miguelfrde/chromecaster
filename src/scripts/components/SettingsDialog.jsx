@@ -18,6 +18,8 @@ export default class SettingsDialog extends React.Component {
 
   static propTypes = {
     show: React.PropTypes.bool.isRequired,
+    changeMediaItemSeconds: React.PropTypes.number.isRequired,
+    availableChromecasts: React.PropTypes.array.isRequired,
     dispatch: React.PropTypes.func.isRequired
   }
 
@@ -50,8 +52,8 @@ export default class SettingsDialog extends React.Component {
               modal={true}
               ref="dialog">
         <div style={{height: 800}}>
-          <ChromecastPicker/>
-          <AutoChangeMediaSelector/>
+          <ChromecastPicker chromecasts={this.props.availableChromecasts}/>
+          <AutoChangeMediaSelector seconds={this.props.changeMediaItemSeconds}/>
         </div>
       </Dialog>
     );

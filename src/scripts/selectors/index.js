@@ -4,14 +4,17 @@ import { createSelector } from 'reselect';
 export const settingsSelector = state => {
   return {
     settingsDialogVisible: state.settingsReducer.dialogOpen,
-    changeMediaItemSeconds: state.settingsReducer.changeMediaItemSeconds
+    changeMediaItemSeconds: state.settingsReducer.changeMediaItemSeconds,
+    availableChromecasts: state.settingsReducer.availableChromecasts,
+    selectedChromecast: state.settingsReducer.selectedChromecast
   };
 };
 
 export const castingSelector = state => {
   return {
     casting: state.castingReducer.casting,
-    changeMediaItemSeconds: state.settingsReducer.changeMediaItemSeconds
+    changeMediaItemSeconds: state.settingsReducer.changeMediaItemSeconds,
+    chromecast: state.settingsReducer.availableChromecasts[state.settingsReducer.selectedChromecast]
   };
 }
 
@@ -38,7 +41,7 @@ export const currentMediaSelector = createSelector(
       mediaFiles: items.map(item => path.join(mediaPath, item)),
       mediaPath: mediaPath,
       mediaFileIndex: index,
-      selectedMediaFile: items[index]
+      selectedMediaFile: (items.length && path.join(mediaPath, items[index])) || ''
     };
     return media;
   }

@@ -1,6 +1,7 @@
 export const OPEN_SETTINGS_DIALOG = 'OPEN_SETTINGS_DIALOG';
 export const CLOSE_SETTINGS_DIALOG = 'CLOSE_SETTINGS_DIALOG';
 export const SET_CHANGE_MEDIA_ITEM_WHEN_CASTING = 'SET_CHANGE_MEDIA_ITEM_WHEN_CASTING';
+export const UPDATE_AVAILABLE_CHROMECASTS = 'UPDATE_AVAILABLE_CHROMECASTS';
 
 export const TOGGLE_CASTING = 'TOGGLE_CASTING';
 
@@ -29,6 +30,13 @@ export function setChangeMediaItemWhenCasting(seconds) {
   return {
     type: SET_CHANGE_MEDIA_ITEM_WHEN_CASTING,
     seconds: seconds
+  };
+}
+
+export function updateAvailableChromecasts(chromecasts) {
+  return {
+    type: UPDATE_AVAILABLE_CHROMECASTS,
+    chromecasts: chromecasts
   };
 }
 

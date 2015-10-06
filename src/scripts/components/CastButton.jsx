@@ -33,7 +33,11 @@ export default class CastButton extends React.Component {
   }
 
   _handleClick() {
-    this.props.dispatch(toggleCasting());
+    if (this.props.chromecast) {
+      this.props.dispatch(toggleCasting());
+    } else {
+      this.props.dispatch(notify('No chromecast available'));
+    }
   }
 
   _mediaItemChanger() {
@@ -52,8 +56,8 @@ export default class CastButton extends React.Component {
       const message = (this.props.changeMediaItemSeconds)?
                       ` with slideshow of ${this.props.changeMediaItemSeconds} seconds` :
                       '';
-      this.props.dispatch(notify(`Casting began ${message}`));
 
+      this.props.dispatch(notify(`Casting began ${message}`));
       this._mediaItemChanger();
     }
   }
