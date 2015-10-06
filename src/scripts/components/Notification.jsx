@@ -13,6 +13,7 @@ export default class Notification extends React.Component {
   constructor(props) {
     super(props);
     this._close = this._close.bind(this);
+    this._dismiss = this._dismiss.bind(this);
   }
 
   static childContextTypes = {
@@ -33,12 +34,14 @@ export default class Notification extends React.Component {
   componentDidUpdate() {
     if (this.props.visible) {
       this.refs.snackbar.show();
-    } else {
-      this.refs.snackbar.dismiss();
     }
   }
 
   _close() {
+    this.props.dispatch(hideNotification());
+  }
+
+  _dismiss() {
     this.props.dispatch(hideNotification());
   }
 
@@ -49,7 +52,8 @@ export default class Notification extends React.Component {
         action="ok"
         autoHideDuration={2000}
         onActionTouchTap={this._close}
-        ref="snackbar"/>
+        ref="snackbar"
+        onDismiss={this._dismiss}/>
     );
   }
 }
