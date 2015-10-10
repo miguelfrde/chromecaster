@@ -7,9 +7,11 @@ import createHashHistory from 'history/lib/createHashHistory';
 import configureStore from './store/configureStore.js';
 import routes from './routes.jsx';
 import ChromecastService from './services/ChromecastService.js';
+import ServerService from './services/ServerService.js';
 import { selectPreviousMediaItem,
          selectNextMediaItem,
          updateAvailableChromecasts } from './actions';
+import network from 'network-address';
 
 injectTapEventPlugin();
 
@@ -28,6 +30,8 @@ document.onkeydown = function (e) {
 
 ChromecastService.watch(
   players => store.dispatch(updateAvailableChromecasts(players)));
+
+ServerService.server().listen(0);
 
 React.render(
   <Provider store={store}>

@@ -3,6 +3,7 @@ import mime from 'mime';
 import chromecasts from 'chromecasts';
 
 import settings from '../settings.js';
+import ServerService from '../services/ServerService.js';
 
 const chromecastList = chromecasts();
 
@@ -16,7 +17,7 @@ export default class ChromecastService {
   static cast(player, mediaFile) {
     const extension = path.extname(mediaFile).toLowerCase();
     if (settings.VALID_EXTENSIONS.indexOf(extension) !== -1) {
-      player.play(mediaFile, {
+      player.play(ServerService.urlFor(mediaFile), {
         title: path.basename(mediaFile, path.extname(mediaFile)),
         type: mime.lookup(extension)
       });
